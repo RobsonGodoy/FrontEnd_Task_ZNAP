@@ -7,8 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ClienteList: typeof import('./src/components/clientes/ClienteList.vue')['default']
     EditTasks: typeof import('./src/components/EditTasks.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    ProductForm: typeof import('./src/components/produtos/ProductForm.vue')['default']
+    ProductList: typeof import('./src/components/produtos/ProductList.vue')['default']
     TaskAdd: typeof import('./src/components/TaskAdd.vue')['default']
     TaskList: typeof import('./src/components/TaskList.vue')['default']
     TaslList: typeof import('./src/components/TaslList.vue')['default']

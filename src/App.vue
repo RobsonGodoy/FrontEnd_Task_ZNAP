@@ -1,11 +1,11 @@
 
 <template>
-  <TaskList />
+  <product-list/>
 </template>
   
 <style scoped></style>
   
 <script setup lang="ts">
-import TaskList from './components/TaskList.vue';
+import ProductList from '@/components/produtos/ProductList.vue';
 
 </script>
