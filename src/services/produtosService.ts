@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { INewProduto } from '@/interface/IProduto';
 
 const API_BASE_URL = 'http://localhost:3456';
 
@@ -26,7 +27,7 @@ export default {
   },
 
   // Método para criar um novo produto
-  async criarProduto(novoProduto: object) {
+  async criarProduto(novoProduto: INewProduto) {
     try {
       const response = await axios.post(`${API_BASE_URL}/produtos`, novoProduto);
       return response.data;

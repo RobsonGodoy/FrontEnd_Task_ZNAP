@@ -104,7 +104,6 @@ export default {
     },
     components: {
         ProductForm,
-        // Não é necessário declarar "novoProdutoModal" aqui
     }
 };
 </script>
