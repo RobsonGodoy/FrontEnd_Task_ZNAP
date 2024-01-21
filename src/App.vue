@@ -6,6 +6,7 @@
     <v-list-item link to="/produtos" title="Produtos"></v-list-item>
     <v-list-item link to="/categorias" title="Categorias"></v-list-item>
     <v-list-item link to="/clientes" title="Clientes"></v-list-item>
+    <v-list-item link to="/pedidos" title="Pedidos"></v-list-item>
   </v-navigation-drawer>
   <router-view></router-view>
   </v-app>

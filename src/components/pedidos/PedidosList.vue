@@ -1,52 +1,84 @@
 <template>
-    <v-container fluid>
-      <v-layout row>
-        <v-main>
-          <v-app-bar>
-            <v-app-bar-title class="text-center">Lista de Pedidos</v-app-bar-title>
-          </v-app-bar>
-          <v-container class="mt-15">
-            <v-table fixed-header height="400px">
-              <thead>
-                <tr>
-                  <th class="text-left">ID</th>
-                  <th class="text-left">Descrição</th>
-                  <th class="text-left">Editar/Excluir</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="pedido in pedidos" :key="pedido.id_pedido">
-                  <td>{{ pedido.id_pedido }}</td>
-                  <td>{{ pedido.descricao }}</td>
-                  <td>
-                    <v-btn @click="editarPedido(pedido)" color="yellow-darken-2" icon="mdi-table-edit" />
-                    <v-btn @click="excluirPedido(pedido)" color="red-darken-3" icon="mdi-close-circle" />
-                  </td>
-                </tr>
-              </tbody>
-            </v-table>
-          </v-container>
-        </v-main>
-      </v-layout>
-    </v-container>
-  </template>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title>Incluir Pedido</v-card-title>
+          <v-card-text>
+            <v-row>
+              <v-col cols="12" md="6">
+                <v-autocomplete
+                  v-model="clienteSelecionado"
+                  :items="clientes"
+                  item-text="nome"
+                  item-value="id_cliente"
+                  label="Escolha um Cliente"
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-autocomplete
+                  v-model="produtoSelecionado"
+                  :items="produtos"
+                  item-text="nome"
+                  item-value="id_produto"
+                  label="Escolha um Produto"
+                ></v-autocomplete>
+              </v-col>
+            </v-row>
+            <v-row class="mt-4">
+              <v-col cols="12">
+                <v-btn @click="adicionarPedido" color="green">Adicionar Pedido</v-btn>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
 
 <script lang="ts">
-import CategoriaService from '@/services/categoriaService.ts';
-import PedidosForm from '@/components/pedidos/PedidosForm.vue';
+import ClienteService from '@/services/clienteService.ts';
+import ProdutoService from '@/services/produtosService.ts';
 
 export default {
   data() {
     return {
-        drawer:true,
-        pedidos: [] as []
+      clienteSelecionado: null,
+      produtoSelecionado: null,
+      clientes: [],
+      produtos: [],
     };
   },
   created() {
-
+    this.carregarClientes();
+    this.carregarProdutos();
   },
   methods: {
-
-  }
+    async carregarClientes() {
+      try {
+        const response = await ClienteService.getClientes();
+        this.clientes = response['Lista de Clientes'];
+      } catch (error) {
+        console.error('Erro ao carregar clientes: ', error);
+      }
+    },
+    async carregarProdutos() {
+      try {
+        const response = await ProdutoService.getProdutos();
+        this.produtos = response['Lista de Produtos'];
+      } catch (error) {
+        console.error('Erro ao carregar produtos: ', error);
+      }
+    },
+    adicionarPedido() {
+      // Implemente a lógica para adicionar o pedido usando as seleções feitas
+      // clienteSelecionado e produtoSelecionado.
+      console.log('Pedido adicionado:', this.clienteSelecionado, this.produtoSelecionado);
+      // Limpar as seleções após adicionar o pedido, se necessário
+      this.clienteSelecionado = null;
+      this.produtoSelecionado = null;
+    },
+  },
 };
 </script>
