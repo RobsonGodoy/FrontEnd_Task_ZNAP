@@ -1,7 +1,15 @@
-import { registerPlugins } from '@/plugins'
-import App from './App.vue'
-import { createApp } from 'vue'
+import { createApp } from 'vue';
+import App from './App.vue';
+import { registerPlugins } from '@/plugins';
+import router from './router'; // Importa o router
 
-const app = createApp(App)
-registerPlugins(app)
-app.mount('#app')
+const app = createApp(App);
+
+// Registra plugins
+registerPlugins(app);
+
+// Usa o Vue Router
+app.use(router);
+
+// Monta o aplicativo no elemento com id 'app'
+app.mount('#app');

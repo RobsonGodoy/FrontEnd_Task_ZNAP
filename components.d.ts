@@ -7,11 +7,19 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    CategoriesForm: typeof import('./src/components/categorias/CategoriesForm.vue')['default']
+    CategoriesList: typeof import('./src/components/categorias/CategoriesList.vue')['default']
     ClienteList: typeof import('./src/components/clientes/ClienteList.vue')['default']
+    ClientesForm: typeof import('./src/components/clientes/ClientesForm.vue')['default']
+    ClientesList: typeof import('./src/components/clientes/ClientesList.vue')['default']
     EditTasks: typeof import('./src/components/EditTasks.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    PedidosForm: typeof import('./src/components/pedidos/PedidosForm.vue')['default']
+    PedidosList: typeof import('./src/components/pedidos/PedidosList.vue')['default']
     ProductForm: typeof import('./src/components/produtos/ProductForm.vue')['default']
     ProductList: typeof import('./src/components/produtos/ProductList.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
     TaskAdd: typeof import('./src/components/TaskAdd.vue')['default']
     TaskList: typeof import('./src/components/TaskList.vue')['default']
     TaslList: typeof import('./src/components/TaslList.vue')['default']
