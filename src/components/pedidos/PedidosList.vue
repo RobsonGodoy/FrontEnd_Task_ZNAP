@@ -1,43 +1,35 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12">
-        <v-card>
-          <v-card-title>Incluir Pedido</v-card-title>
-          <v-card-text>
-            <v-row>
-              <v-col cols="12" md="6">
-                <v-autocomplete
-                  v-model="clienteSelecionado"
-                  :items="clientes"
-                  item-text="nome"
-                  item-value="id_cliente"
-                  label="Escolha um Cliente"
-                ></v-autocomplete>
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-autocomplete
-                  v-model="produtoSelecionado"
-                  :items="produtos"
-                  item-text="nome"
-                  item-value="id_produto"
-                  label="Escolha um Produto"
-                ></v-autocomplete>
-              </v-col>
-            </v-row>
-            <v-row class="mt-4">
-              <v-col cols="12">
-                <v-btn @click="adicionarPedido" color="green">Adicionar Pedido</v-btn>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <v-main>
+      <v-row>
+        <v-col cols="12">
+          <v-card>
+            <v-card-title>Incluir Pedido</v-card-title>
+            <v-card-text>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-select v-model="clienteSelecionado" :items="nomesClientes" label="Cliente" required></v-select>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-select v-model="produtoSelecionado" :items="nomesProdutos" label="Escolha um Produto" required></v-select>
+                </v-col>
+              </v-row>
+              <v-row class="mt-4">
+                <v-col cols="12">
+                  <v-btn @click="adicionarPedido" color="green">Adicionar Pedido</v-btn>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-main>
   </v-container>
 </template>
 
 <script lang="ts">
+import { ICliente } from '@/interface/ICliente';
+import { IProduto } from '@/interface/IProduto';
 import ClienteService from '@/services/clienteService.ts';
 import ProdutoService from '@/services/produtosService.ts';
 
@@ -46,9 +38,17 @@ export default {
     return {
       clienteSelecionado: null,
       produtoSelecionado: null,
-      clientes: [],
-      produtos: [],
+      clientes: [] as Array<ICliente>,
+      produtos: [] as Array<IProduto>,
     };
+  },
+  computed: {
+    nomesClientes() {
+      return this.clientes.map(cliente => cliente.nome);
+    },
+    nomesProdutos() {
+      return this.produtos.map(produto => produto.nome);
+    },
   },
   created() {
     this.carregarClientes();
@@ -72,10 +72,7 @@ export default {
       }
     },
     adicionarPedido() {
-      // Implemente a lógica para adicionar o pedido usando as seleções feitas
-      // clienteSelecionado e produtoSelecionado.
       console.log('Pedido adicionado:', this.clienteSelecionado, this.produtoSelecionado);
-      // Limpar as seleções após adicionar o pedido, se necessário
       this.clienteSelecionado = null;
       this.produtoSelecionado = null;
     },
